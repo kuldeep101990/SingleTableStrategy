@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+ <hibernate-mapping>
+    <class name="singleTable.Person" table="PERSONS">
+        <id name="id" column="PERSON_ID" type="long">
+            <generator class="identity" />
+        </id>
+        <discriminator column="PERSON_TYPE" type="string" />
+        <property name="name" column="NAME" type="string" />
+        <property name="address" column="ADDRESS" type="string" />
+
+        <subclass name="singleTable.Employee" discriminator-value="E">
+            <property name="salary" column="SALARY" type="double" />
+            <property name="title" column="TITLE" type="string" />
+        </subclass>
+
+        <subclass name="singleTable.Student" discriminator-value="S">
+            <property name="major" column="MAJOR" type="string" />
+            <property name="gpa" column="GPA" type="double" />
+        </subclass>
+    </class>
+</hibernate-mapping> 
+
